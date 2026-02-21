@@ -5,7 +5,8 @@ from langchain_core.messages import HumanMessage
 CONFIG= {'configurable':{'thread_id':'thread-1'}}
 st.set_page_config(page_title="LangGraph ChatBot",page_icon=":mortar_board",layout='centered')
 
-st.title("")
+st.title("U-Chat")
+st.caption("U-Chat Remember everyting")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 

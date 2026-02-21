@@ -21,12 +21,13 @@ if user_question:
         st.markdown(user_question)
     
     with st.chat_message('assistant'):
-       with st.spinner('Thinking...'):
-        ai_message=''
-        try:
-           response= chatbot.invoke({'messages':[HumanMessage(content=user_question)]},config=CONFIG)
-           ai_message=response['messages'][-1].content
-        except Exception as ex:
-            st.markdown(ex)
-        st.markdown(ai_message)
-        st.session_state.messages.append({'role':'assistant','content':ai_message})
+       
+         ai_message= st.write_stream(
+             message_chunk.content for message_chunk,metadata in  chatbot.stream(
+              {'messages':[HumanMessage(content=user_question)]},
+             config= {'configurable':{'thread_id':'thread-1'}},
+              stream_mode='messages')
+          )
+
+
+    st.session_state.messages.append({'role':'assistant','content':ai_message})

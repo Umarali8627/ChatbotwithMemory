@@ -1,5 +1,5 @@
 import streamlit as st
-from backend import chatbot
+from backend import chatbot,retrieve_all_threads
 from langchain_core.messages import HumanMessage
 import uuid
 
@@ -60,7 +60,7 @@ if "messages" not in st.session_state:
 if 'thread_id' not in st.session_state:
     st.session_state['thread_id']=genrate_thread_id()
 if 'chat_threads' not in st.session_state:
-    st.session_state.chat_threads=[]
+    st.session_state.chat_threads=retrieve_all_threads()
 # migrate old format: [thread_id, ...] to [{"thread_id": ..., "title": ...}]
 if st.session_state.chat_threads and not isinstance(st.session_state.chat_threads[0], dict):
     st.session_state.chat_threads = [

@@ -3,3 +3,4 @@ dotenv
 streamlit 
 langchain
 langchain_groq
+sqlite3
